@@ -1,0 +1,157 @@
+
+
+
+// These are sets of initial values and mesh.
+
+//// Set 1: theta = 60 path 1
+// string logprefix = "deg60path1";  
+// string meshfilename = "datainit/deg60_div120_mesh.msh";
+// string u1filename   = "datainit/A0_deg60_div120_rey2000_posi0_u1.txt";
+// string u2filename   = "datainit/A0_deg60_div120_rey2000_posi0_u2.txt";
+// real[int] arrayRey4 = [2000,2200,2400,2600,2800,3000,3200,3400,3600];
+
+//// Set 2: theta = 60 path 2
+// string logprefix = "deg60path2"; 
+// string meshfilename = "datainit/deg60_div120_mesh.msh";
+// string u1filename   = "datainit/A0_deg60_div120_rey2000_posi28_u1.txt";
+// string u2filename   = "datainit/A0_deg60_div120_rey2000_posi28_u2.txt";
+// real[int] arrayRey4 = [2000,2200,2400,2600,2800,3000,3200,3400,3600];
+ 
+//// Set 3: theta = 90
+string logprefix = "deg90path0";  
+string meshfilename = "datainit/deg90_div_120_mesh.msh";
+string u1filename   = "datainit/deg90_div_120u1_rey2000.txt";
+string u2filename   = "datainit/deg90_div_120u2_rey2000.txt";
+real[int] arrayRey4 = [2000,2200,2400,2600,2800,3000,3200,3400,3600];
+
+// Some options.
+// Note: If outputlog == true or outputFigData == true, many data file will be produced.
+bool outputlog = false;
+bool outputFigData = false;
+bool waitmode  = false;
+real[int] contarray = [-0.1,-0.09,-0.08,-0.07,-0.06,-0.05,-0.04,-0.03,-0.02,-0.01,-0.005,-0.001,-5.0e-4,-4.0e-4,-3.0e-4,-2.0e-4,-1.0e-4,-1.0e-5,0.00,1.0e-8,1.0e-7,4.0e-7,6.0e-7,8.0e-7,1.0e-4,0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009,0.01,0.0125, 0.015,0.0175,0.02];
+real vmax = 1.0;
+real[int] vecabsvals(21);
+for (int i = 0; i < vecabsvals.n; i++) vecabsvals[i] = vmax*(i-0.0)/(vecabsvals.n - 1.0);
+
+func elemU = P2;
+func elemP = P1;
+mesh Th = readmesh(meshfilename);
+fespace Vh(Th, elemU);
+Vh u1, u2, v1, v2, du1, du2;
+fespace Qh(Th, elemP);
+Qh p, q, dp;
+Qh phi, psi; // for streamlines
+
+{
+  ifstream fileu1(u1filename);
+  ifstream fileu2(u2filename);
+  fileu1 >> u1[] ;
+  fileu2 >> u2[] ;
+}
+
+// These values are labels of the boundaries, which must be consistent with the input mesh file
+int bslide = 41;
+int bwall = 51; 
+plot(Th,wait=waitmode);
+
+real nu = 1.0e-0; // this value 1.0e-0 is not actually used
+
+// This is the boundary condition for the upper lid, but this is not used for the Newton method. 
+// The boundary condition appears in the input initial value.
+//func flowslide = 4.0*x*(1.0-x); 
+//func flowslide = 1.0; // Another boundary condtion. Not used here
+
+// Macro
+macro Grad(u1,u2) [dx(u1), dy(u1), dx(u2),dy(u2)] //
+macro UgradV(u1,u2,v1,v2) [[u1,u2]'*[dx(v1),dy(v1)],
+                        [u1,u2]'*[dx(v2),dy(v2)]] //
+macro div(u1,u2) (dx(u1) + dy(u2)) //
+
+problem oseenIncre ([du1, du2, dp], [v1, v2, q])
+    = int2d(Th)(
+        nu * (Grad(du1,du2)' * Grad(v1,v2))
+            + UgradV(du1,du2, u1, u2)' * [v1,v2]
+            + UgradV( u1, u2,du1,du2)' * [v1,v2]
+            - div(du1,du2) * q
+            - div(v1,v2) * dp
+            - 1e-8*dp*q //stabilization term
+        ) 
+        - int2d(Th) (
+            nu * (Grad(u1,u2)' * Grad(v1,v2))
+            + UgradV(u1,u2, u1, u2)' * [v1,v2]
+            - div(u1,u2) * q
+            - div(v1,v2) * p
+			- 1e-8*p*q //stabilization term
+        )
+        + on(bwall, bslide,   du1=0, du2=0)
+            ;
+
+problem streamlines (phi, psi)
+	= int2d(Th)(
+		  dx(phi)*dx(psi)
+		+ dy(phi)*dy(psi)
+	)
+	+ int2d(Th)(
+		- psi*( dx(u2) - dy(u1))
+	)
+	+ on(bslide, phi=0)
+	+ on(bwall,  phi=0);
+
+real l2norm, reytemp;
+real maxdu1, mindu1, maxdu2, mindu2, absmaxdu1, absmaxdu2;
+bool converged;
+real convergecri = 1.0e-10;
+
+for (int reyposi=0; reyposi < arrayRey4.n; reyposi++){
+	reytemp = arrayRey4[reyposi];
+	nu = 1.0/reytemp;
+
+	cout<< "newton NS " + logprefix + " Re "+reytemp+" nu "+nu + " begin" <<endl;
+
+	converged = false;
+	// Newton iteration
+	for(int i=0; i<10; i++){
+		oseenIncre; 
+		u1[] -= du1[]; u2[] -= du2[]; p[] -= dp[];
+		plot([u1,u2],p,cmm="newton NS Re "+reytemp+" i " + i,wait=0, varrow=vecabsvals);
+		maxdu1 = du1[].max; mindu1 = du1[].min; maxdu2 = du2[].max; mindu2 = du2[].min;
+		absmaxdu1 = max(maxdu1, -mindu1); absmaxdu2 = max(maxdu2, -mindu2);
+		if (absmaxdu1 < convergecri && absmaxdu2 < convergecri){
+			converged = true;
+			break;
+		}
+	}
+
+	if(converged == false){
+		cout << "Fail to converge in Newton iteration. Abort." <<endl;
+		break;
+	}
+
+	streamlines;
+
+	// Output data. 
+	// Note: output sols (.txt file) are related to the mesh file given by "meshfilename".
+	// Note: Data structure of P2 sols may be more difficult than P1.
+	// Note: phi is the stream function by P1 element.
+	if(outputFigData==true){
+		string soloutfilenamebasic = "resdir/"+ logprefix+"_Re"+reytemp;
+		plot(phi,wait=waitmode,viso=contarray,bw=true,ps=soloutfilenamebasic+"_cont.ps"); 
+		ofstream fileu1(soloutfilenamebasic+"_u1.txt");
+		ofstream fileu2(soloutfilenamebasic+"_u2.txt");
+		ofstream filephi(soloutfilenamebasic+"_phi.txt");
+		fileu1 << u1[] << endl;
+		fileu2 << u2[] << endl;
+		filephi << phi[] << endl;
+	} else {
+		plot(phi,wait=waitmode,viso=contarray); 
+	}
+
+	l2norm = sqrt(int2d(Th)(u1*u1+u2*u2));
+	cout << "l2norm " << l2norm <<endl;  
+	if(outputlog==true){
+		ofstream logfile("resdir/normlog.csv", append);
+		logfile << logprefix << "," <<reytemp << "," << l2norm << ","  << endl;
+	}
+}
+
