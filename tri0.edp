@@ -72,6 +72,8 @@
 
 //// Set 6 (skipped number)
 
+; // This semicolon is only for preventing an error.
+
 //// Set 7 : theta = 70 higher Re
 // string logprefix = "deg70higherRe";  
 // string meshfilename = "datainit/deg70_div120_mesh.msh";
