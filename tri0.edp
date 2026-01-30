@@ -1,7 +1,18 @@
-
-
-
 // These are sets of initial values and mesh.
+
+//// Set 0-1: theta = 60 path 0 Re 2000 -> 8000
+// string logprefix = "deg60path0";  
+// string meshfilename = "datainit/deg60_div120_mesh.msh";
+// string u1filename   = "datainit/deg60path0_Re2000_u1.txt";
+// string u2filename   = "datainit/deg60path0_Re2000_u2.txt";
+// real[int] arrayRey4 = [2000,2500,3000,3500,4000,4500,5000,5500,6000,6500,7000,7500,8000];
+
+//// Set 0-2: theta = 60 path 0 Re 2000 -> 1700
+// string logprefix = "deg60path0";  
+// string meshfilename = "datainit/deg60_div120_mesh.msh";
+// string u1filename   = "datainit/deg60path0_Re2000_u1.txt";
+// string u2filename   = "datainit/deg60path0_Re2000_u2.txt";
+// real[int] arrayRey4 = [2000,1900,1800,1700];
 
 //// Set 1: theta = 60 path 1
 // string logprefix = "deg60path1";  
@@ -10,19 +21,147 @@
 // string u2filename   = "datainit/A0_deg60_div120_rey2000_posi0_u2.txt";
 // real[int] arrayRey4 = [2000,2200,2400,2600,2800,3000,3200,3400,3600];
 
+//// Set 1-2: theta = 60 path 1 left
+// string logprefix = "deg60path1";  
+// string meshfilename = "datainit/deg60_div120_mesh.msh";
+// string u1filename   = "datainit/A0_deg60_div120_rey2000_posi0_u1.txt";
+// string u2filename   = "datainit/A0_deg60_div120_rey2000_posi0_u2.txt";
+// real[int] arrayRey4 = [2000,1500,1000];
+
 //// Set 2: theta = 60 path 2
 // string logprefix = "deg60path2"; 
 // string meshfilename = "datainit/deg60_div120_mesh.msh";
 // string u1filename   = "datainit/A0_deg60_div120_rey2000_posi28_u1.txt";
 // string u2filename   = "datainit/A0_deg60_div120_rey2000_posi28_u2.txt";
 // real[int] arrayRey4 = [2000,2200,2400,2600,2800,3000,3200,3400,3600];
+
+//// Set 2-2: theta = 60 path 2 Re 2000 -> 1700
+// string logprefix = "deg60path2"; 
+// string meshfilename = "datainit/deg60_div120_mesh.msh";
+// string u1filename   = "datainit/A0_deg60_div120_rey2000_posi28_u1.txt";
+// string u2filename   = "datainit/A0_deg60_div120_rey2000_posi28_u2.txt";
+// real[int] arrayRey4 = [2000,1900,1800,1700];
  
 //// Set 3: theta = 90
-string logprefix = "deg90path0";  
-string meshfilename = "datainit/deg90_div_120_mesh.msh";
-string u1filename   = "datainit/deg90_div_120u1_rey2000.txt";
-string u2filename   = "datainit/deg90_div_120u2_rey2000.txt";
-real[int] arrayRey4 = [2000,2200,2400,2600,2800,3000,3200,3400,3600];
+// string logprefix = "deg90path0";  
+// string meshfilename = "datainit/deg90_div_120_mesh.msh";
+// string u1filename   = "datainit/deg90_div_120u1_rey2000.txt";
+// string u2filename   = "datainit/deg90_div_120u2_rey2000.txt";
+// real[int] arrayRey4 = [2000,2500,3000,3500,4000,4500,5000,5500,6000,6500,7000,7500,8000];
+
+//// Set 4-1: theta = 75 
+// string logprefix = "deg75";  
+// string meshfilename = "datainit/deg75_div120_mesh.msh";
+// string u1filename   = "datainit/path0_Re2000_deg75_u1.txt";
+// string u2filename   = "datainit/path0_Re2000_deg75_u2.txt";
+// real[int] arrayRey4 = [2000,1900,1800,1700,1600,1500,1400,1300,1250,1200,1100,1000];
+
+//// Set 4-2: theta = 75 
+// string logprefix = "deg75";  
+// string meshfilename = "datainit/deg75_div120_mesh.msh";
+// string u1filename   = "datainit/path0_Re2000_deg75_u1.txt";
+// string u2filename   = "datainit/path0_Re2000_deg75_u2.txt";
+// real[int] arrayRey4 = [2000,2500,3000,3500,4000,4500,5000,5500,6000,6500,7000,7500,8000];
+
+//// Set 5: theta = 70 lower Re
+// string logprefix = "deg70lowerRe";  
+// string meshfilename = "datainit/deg70_div120_mesh.msh";
+// string u1filename   = "datainit/deg70lowre_Re1000_u1.txt";
+// string u2filename   = "datainit/deg70lowre_Re1000_u2.txt";
+// real[int] arrayRey4 = [1000,1100,1200,1300,1400];
+
+//// Set 6 (skipped number)
+
+//// Set 7 : theta = 70 higher Re
+// string logprefix = "deg70higherRe";  
+// string meshfilename = "datainit/deg70_div120_mesh.msh";
+// string u1filename   = "datainit/path0_Re2000_deg70_u1.txt";
+// string u2filename   = "datainit/path0_Re2000_deg70_u2.txt";
+// real[int] arrayRey4 = [2000,1900,1800,1700,1600,1500,1400];
+
+//// Set 8-1: theta = 120 around Re 10000 path 1 right. Note: difference between Sets 8 and 9 are very small
+// string logprefix = "deg120aroundRe10000path1";  
+// string meshfilename = "datainit/deg120_div200_mesh.msh";
+// string u1filename   = "datainit/B_deg120_div200_rey10000_posi13_u1.txt";
+// string u2filename   = "datainit/B_deg120_div200_rey10000_posi13_u2.txt";
+// real[int] arrayRey4 = [10000,11000,12000,13000,14000,15000];
+
+//// Set 8-2: theta = 120 around Re 10000 path 1 left
+// string logprefix = "deg120aroundRe10000path1";  
+// string meshfilename = "datainit/deg120_div200_mesh.msh";
+// string u1filename   = "datainit/B_deg120_div200_rey10000_posi13_u1.txt";
+// string u2filename   = "datainit/B_deg120_div200_rey10000_posi13_u2.txt";
+// real[int] arrayRey4 = [10000,9000,8900,8800,8700,8600,8500,8400,8300];
+
+//// Set 9-1: theta = 120 around Re 10000 path 2 right Note: difference between Sets 8 and 9 are very small
+// string logprefix = "deg120aroundRe10000path2";  
+// string meshfilename = "datainit/deg120_div200_mesh.msh";
+// string u1filename   = "datainit/B_deg120_div200_rey10000_posi1_u1.txt";
+// string u2filename   = "datainit/B_deg120_div200_rey10000_posi1_u2.txt";
+// real[int] arrayRey4 = [10000,11000,12000];
+
+//// Set 9-2: theta = 120 around Re 10000 path 2 left
+// string logprefix = "deg120aroundRe10000path2";  
+// string meshfilename = "datainit/deg120_div200_mesh.msh";
+// string u1filename   = "datainit/B_deg120_div200_rey10000_posi1_u1.txt";
+// string u2filename   = "datainit/B_deg120_div200_rey10000_posi1_u2.txt";
+// real[int] arrayRey4 = [10000,9000,8900,8800,8700,8600,8500,8400,8300];
+
+//// Set 10-1: theta = 90 around Re 7000 path 1 right. Note: there are two meshes for deg90
+// string logprefix = "deg90aroundRe7000path1";  
+// string meshfilename = "datainit/deg90_div200_mesh.msh";
+// string u1filename   = "datainit/theta1_deg90_div200_rey7000_posi30_u1.txt";
+// string u2filename   = "datainit/theta1_deg90_div200_rey7000_posi30_u2.txt";
+// real[int] arrayRey4 = [7000,8000,9000,10000,11000,12000,13000,14000,15000,16000,17000,18000,19000];
+
+// //// Set 10-2: theta = 90 around Re 7000 path 1 left
+// string logprefix = "deg90aroundRe7000path1";  
+// string meshfilename = "datainit/deg90_div200_mesh.msh";
+// string u1filename   = "datainit/theta1_deg90_div200_rey7000_posi30_u1.txt";
+// string u2filename   = "datainit/theta1_deg90_div200_rey7000_posi30_u2.txt";
+// real[int] arrayRey4 = [7000,6900,6800];
+
+// //// Set 11-1: theta = 90 around Re 7000 path 2 right Note: there are two meshes for deg90
+// string logprefix = "deg90aroundRe7000path2";  
+// string meshfilename = "datainit/deg90_div200_mesh.msh";
+// string u1filename   = "datainit/theta0_deg90_div200_rey7000_posi30_u1.txt";
+// string u2filename   = "datainit/theta0_deg90_div200_rey7000_posi30_u2.txt";
+// real[int] arrayRey4 = [7000,7500,8000,8500,9000,10000,11000,12000,13000,14000,15000,16000,17000,18000,19000];
+
+// //// Set 11-2: theta = 90 around Re 7000 path 2 left
+// string logprefix = "deg90aroundRe7000path2";  
+// string meshfilename = "datainit/deg90_div200_mesh.msh";
+// string u1filename   = "datainit/theta0_deg90_div200_rey7000_posi30_u1.txt";
+// string u2filename   = "datainit/theta0_deg90_div200_rey7000_posi30_u2.txt";
+// real[int] arrayRey4 = [7000,6900,6800];
+
+//// Set 12-1: theta = 60 around Re 8000 path 1 right. Note: there are two meshes for deg60
+// string logprefix = "deg60aroundRe8000path1";  
+// string meshfilename = "datainit/deg60_div150_mesh.msh";
+// string u1filename   = "datainit/theta1_deg60_div150_rey8000_posi15_u1.txt";
+// string u2filename   = "datainit/theta1_deg60_div150_rey8000_posi15_u2.txt";
+// real[int] arrayRey4 = [8000,9000,10000,11000,12000,13000,14000,15000,16000,17000,18000,19000];
+
+// //// Set 12-2: theta = 60 around Re 8000 path 1 left
+// string logprefix = "deg60aroundRe8000path1";  
+// string meshfilename = "datainit/deg60_div150_mesh.msh";
+// string u1filename   = "datainit/theta1_deg60_div150_rey8000_posi15_u1.txt";
+// string u2filename   = "datainit/theta1_deg60_div150_rey8000_posi15_u2.txt";
+// real[int] arrayRey4 = [8000,7900,7800,7700,7600,7500,7400];
+
+// //// Set 13-1: theta = 60 around Re 8000 path 2 right Note: there are two meshes for deg60
+string logprefix = "deg60aroundRe8000path2";  
+string meshfilename = "datainit/deg60_div150_mesh.msh";
+string u1filename   = "datainit/theta0_deg60_div150_rey8000_posi15_u1.txt";
+string u2filename   = "datainit/theta0_deg60_div150_rey8000_posi15_u2.txt";
+real[int] arrayRey4 = [8000,8500,9000,10000,11000,12000,13000,14000,15000,16000,17000];
+
+// //// Set 13-2: theta = 60 around Re 8000 path 2 left
+// string logprefix = "deg60aroundRe8000path2";  
+// string meshfilename = "datainit/deg60_div150_mesh.msh";
+// string u1filename   = "datainit/theta0_deg60_div150_rey8000_posi15_u1.txt";
+// string u2filename   = "datainit/theta0_deg60_div150_rey8000_posi15_u2.txt";
+// real[int] arrayRey4 = [8000,7900,7800,7700,7600,7500,7400];
 
 // Some options.
 // Note: If outputlog == true or outputFigData == true, many data file will be produced.
@@ -34,6 +173,7 @@ real vmax = 1.0;
 real[int] vecabsvals(21);
 for (int i = 0; i < vecabsvals.n; i++) vecabsvals[i] = vmax*(i-0.0)/(vecabsvals.n - 1.0);
 
+// The following part is rather fixed.
 func elemU = P2;
 func elemP = P1;
 mesh Th = readmesh(meshfilename);
@@ -99,7 +239,7 @@ problem streamlines (phi, psi)
 	+ on(bwall,  phi=0);
 
 real l2norm, reytemp;
-real maxdu1, mindu1, maxdu2, mindu2, absmaxdu1, absmaxdu2;
+real absmaxdu1, absmaxdu2;
 bool converged;
 real convergecri = 1.0e-10;
 
@@ -114,9 +254,8 @@ for (int reyposi=0; reyposi < arrayRey4.n; reyposi++){
 	for(int i=0; i<10; i++){
 		oseenIncre; 
 		u1[] -= du1[]; u2[] -= du2[]; p[] -= dp[];
-		plot([u1,u2],p,cmm="newton NS Re "+reytemp+" i " + i,wait=0, varrow=vecabsvals);
-		maxdu1 = du1[].max; mindu1 = du1[].min; maxdu2 = du2[].max; mindu2 = du2[].min;
-		absmaxdu1 = max(maxdu1, -mindu1); absmaxdu2 = max(maxdu2, -mindu2);
+		plot([u1,u2],p,cmm=logprefix+" Re "+reytemp+" newton NS i " + i,wait=0, varrow=vecabsvals);
+		absmaxdu1  = du1[].linfty; absmaxdu2 = du2[].linfty;
 		if (absmaxdu1 < convergecri && absmaxdu2 < convergecri){
 			converged = true;
 			break;
@@ -144,7 +283,8 @@ for (int reyposi=0; reyposi < arrayRey4.n; reyposi++){
 		fileu2 << u2[] << endl;
 		filephi << phi[] << endl;
 	} else {
-		plot(phi,wait=waitmode,viso=contarray); 
+		plot(phi,cmm=logprefix+" Re "+reytemp + " streamlines", wait=waitmode,viso=contarray); 
+		//plot(u1,wait=1); 
 	}
 
 	l2norm = sqrt(int2d(Th)(u1*u1+u2*u2));
